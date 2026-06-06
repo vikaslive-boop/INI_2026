@@ -43,7 +43,6 @@
   --font-display: 'Syne', sans-serif;
   --font-body:    'DM Sans', sans-serif;
   --font-mono:    'DM Mono', monospace;
-  /* Plain number font - override display font for numerics */
   --font-num:     'DM Sans', sans-serif;
 }
 
@@ -272,12 +271,11 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
   gap: 20px;
 }
-/* Clickable achievement cards */
 .achievement-card {
   background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border2); border-radius: var(--radius-lg); padding: 28px;
   box-shadow: var(--shadow-md); position: relative; overflow: hidden;
-  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s; 
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s;
   cursor: pointer;
 }
 .achievement-card[data-link] { cursor: pointer; }
@@ -287,7 +285,6 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   width: 120px; height: 120px; border-radius: 50%;
   background: var(--a-glow, rgba(245,166,35,.1)); filter: blur(30px); pointer-events: none;
 }
-/* Arrow indicator on clickable cards */
 .achievement-card .ach-arrow {
   position: absolute;
   top: 20px; right: 20px;
@@ -302,16 +299,14 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
 }
 .achievement-card:hover .ach-arrow { opacity: 1; transform: translateX(0); }
 .ach-icon { font-size: 36px; margin-bottom: 16px; }
-
-/* PLAIN NUMBERS — use DM Sans instead of Syne for all numeric displays */
-.ach-number { 
-  font-family: var(--font-num); 
-  font-size: 48px; 
-  font-weight: 700; 
-  letter-spacing: -1px; 
-  line-height: 1; 
-  margin-bottom: 4px; 
-  color: var(--text-1); 
+.ach-number {
+  font-family: var(--font-num);
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--text-1);
 }
 .ach-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 6px; }
 .ach-sub { font-size: 13px; color: var(--text-3); line-height: 1.5; }
@@ -776,7 +771,7 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
 .interview-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); flex-wrap: wrap; margin-top: 8px; }
 .meta-dot { width: 3px; height: 3px; background: var(--text-4); border-radius: 50%; }
 
-/* ======= COLLAGE VIDEO SECTION ======= */
+/* COLLAGE VIDEO SECTION */
 #collage-video {
   background: transparent;
   padding: 60px clamp(20px,5vw,80px) 100px;
@@ -816,7 +811,6 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   background: #000;
   cursor: pointer;
 }
-/* Glowing border ring */
 .collage-video-outer::before {
   content: '';
   position: absolute;
@@ -850,7 +844,6 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
 }
 .collage-thumb-fallback span { font-size: 64px; }
 .collage-thumb-fallback p { font-size: 14px; color: rgba(255,255,255,0.4); font-family: var(--font-mono); letter-spacing: 1px; }
-/* Big centred play button */
 .collage-play-overlay {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
@@ -891,7 +884,6 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.15);
 }
-/* Pills row */
 .collage-pills {
   display: flex;
   align-items: center;
@@ -925,7 +917,13 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   transition: opacity .4s;
 }
 #video-modal.open { opacity: 1; pointer-events: all; }
-.modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); cursor: pointer; }
+.modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+}
 .modal-inner {
   position: relative; z-index: 1;
   background: var(--bg2);
@@ -947,13 +945,212 @@ section { padding: 100px clamp(20px,5vw,80px) 60px; }
   font-size: 18px; transition: background .2s; flex-shrink: 0; color: var(--text-2);
 }
 .modal-close:hover { background: rgba(0,0,0,.12); }
-.modal-video { width: 100%; border-radius: var(--radius-md); background: #000; display: block; }
+
+/* Video wrapper — clean, no overflow tricks needed */
+.modal-video-wrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #000;
+}
+.modal-video-wrap video {
+  border-radius: var(--radius-md);
+  display: block;
+  width: 100%;
+}
 .modal-no-video {
   aspect-ratio: 16/9; border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--indigo-soft), var(--gold-light));
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
 }
 .modal-no-video p { font-size: 14px; color: var(--text-3); }
+
+/* ======= RANKER POPUP — OUTSIDE the video, below the player ======= */
+#ranker-popup {
+  position: relative;
+  z-index: 1;
+  margin: 14px 0 0;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0s, transform 0s, max-height 0s;
+}
+#ranker-popup.pop-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+  max-height: 120px;
+  overflow: visible;
+  transition:
+    opacity    .5s  cubic-bezier(.16,1,.3,1),
+    transform  .5s  cubic-bezier(.16,1,.3,1),
+    max-height .5s  cubic-bezier(.16,1,.3,1);
+}
+#ranker-popup.pop-out {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  max-height: 0;
+  transition:
+    opacity    .3s ease,
+    transform  .3s ease,
+    max-height .35s ease;
+}
+
+.rp-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(10,10,14,0.97);
+  border: 1px solid rgba(245,166,35,0.22);
+  border-radius: 16px;
+  padding: 14px 20px 14px 14px;
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.45),
+    0 4px 12px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Avatar icon box */
+.rp-avatar {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124, 111, 240, 0.18), rgba(28, 143, 210, 0.12));
+  border: 1px solid rgba(240, 229, 210, 0.28);
+  object-fit: contain;
+  padding: 8px;
+  flex-shrink: 0;
+}
+#ranker-popup.pop-in .rp-avatar {
+  animation: rp-avatar-in .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes rp-avatar-in {
+  from { transform: scale(0.6) rotate(-12deg); opacity: 0; }
+  to   { transform: scale(1)   rotate(0deg);   opacity: 1; }
+}
+
+/* Gold left accent bar */
+.rp-accent-bar {
+  width: 3px;
+  align-self: stretch;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #F5A623 0%, rgba(255,107,53,0.3) 100%);
+  flex-shrink: 0;
+}
+#ranker-popup.pop-in .rp-accent-bar {
+  animation: rp-bar-in .5s .05s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes rp-bar-in {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+.rp-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rp-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.4px;
+  color: #FFFFFF;
+  line-height: 1;
+}
+#ranker-popup.pop-in .rp-name {
+  animation: rp-slide-in .5s .06s cubic-bezier(.16,1,.3,1) both;
+}
+
+.rp-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#ranker-popup.pop-in .rp-meta {
+  animation: rp-slide-in .5s .13s cubic-bezier(.16,1,.3,1) both;
+}
+#ranker-popup.pop-in .rp-center-line {
+  animation: rp-slide-in .5s .19s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes rp-slide-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.rp-rank {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #F5A623;
+  letter-spacing: .4px;
+}
+.rp-sep {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.rp-plan {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.48);
+}
+.rp-center-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* NOW SPEAKING badge */
+.rp-badge {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.rp-badge-pill {
+  background: rgba(245,166,35,0.12);
+  border: 1px solid rgba(245,166,35,0.28);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: #F5A623;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+/* Pulsing dot next to badge */
+.rp-badge-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #F5A623;
+  box-shadow: 0 0 0 0 rgba(245,166,35,0.6);
+}
+#ranker-popup.pop-in .rp-badge-pill {
+  animation: rp-badge-in .5s .2s cubic-bezier(.16,1,.3,1) both;
+}
+#ranker-popup.pop-in .rp-badge-dot {
+  animation: rp-badge-in .5s .2s cubic-bezier(.16,1,.3,1) both, rp-dot-pulse 1.8s .7s ease-in-out infinite;
+}
+@keyframes rp-badge-in {
+  from { opacity: 0; transform: scale(0.8) translateY(6px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+@keyframes rp-dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(245,166,35,0.6); }
+  50%       { box-shadow: 0 0 0 6px rgba(245,166,35,0);   }
+}
 
 /* FOOTER */
 footer {
@@ -984,6 +1181,8 @@ footer {
   .interview-story-title { font-size: 17px; }
   .collage-play-circle { width: 64px; height: 64px; }
   #collage-video { padding: 40px 20px 80px; }
+  .rp-name { font-size: 17px; }
+  .rp-badge-pill { font-size: 9px; padding: 5px 10px; }
 }
 @media (max-width: 480px) {
   .hero-achievement-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
@@ -993,167 +1192,6 @@ footer {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
-
-/* ======= RANKER POPUP OVERLAY ======= */
-
-/* The popup anchor sits OUTSIDE the video, below the video wrap */
-#ranker-popup-anchor {
-  position: relative;
-  height: 0; /* zero height — popup floats up from here */
-  pointer-events: none;
-}
-
-#ranker-popup {
-  position: absolute;
-  /* default: peek above the video bottom edge — sits OUTSIDE */
-  bottom: 16px;
-  left: 20px;
-  z-index: 30;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(16px) scale(0.97);
-  transition: opacity 0s, transform 0s;
-  will-change: opacity, transform, bottom, left;
-}
-
-/* Normal (outside) state — animated entry */
-#ranker-popup.pop-in {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition:
-    opacity   .5s  cubic-bezier(.16,1,.3,1),
-    transform .5s  cubic-bezier(.16,1,.3,1),
-    bottom    .45s cubic-bezier(.16,1,.3,1),
-    left      .45s cubic-bezier(.16,1,.3,1);
-}
-#ranker-popup.pop-out {
-  opacity: 0;
-  transform: translateY(10px) scale(0.97);
-  transition: opacity .28s ease, transform .28s ease;
-}
-
-/* FULLSCREEN mode — popup moves inside the video */
-#ranker-popup.inside {
-  bottom: 52px;
-  left: 24px;
-  transition:
-    opacity   .5s  cubic-bezier(.16,1,.3,1),
-    transform .5s  cubic-bezier(.16,1,.3,1),
-    bottom    .45s cubic-bezier(.16,1,.3,1),
-    left      .45s cubic-bezier(.16,1,.3,1);
-}
-
-.rp-inner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: rgba(8,8,10,0.78);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 16px;
-  padding: 13px 22px 13px 14px;
-  box-shadow:
-    0 12px 40px rgba(0,0,0,0.55),
-    0 2px 8px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-}
-/* Left gold bar — animated width on entry */
-.rp-accent {
-  width: 3px;
-  height: 46px;
-  border-radius: 2px;
-  background: linear-gradient(to bottom, #F5A623, rgba(255,107,53,0.35));
-  flex-shrink: 0;
-  transform-origin: top center;
-  animation: none;
-}
-#ranker-popup.pop-in .rp-accent {
-  animation: accent-grow .5s cubic-bezier(.16,1,.3,1) forwards;
-}
-@keyframes accent-grow {
-  from { transform: scaleY(0); opacity: 0; }
-  to   { transform: scaleY(1); opacity: 1; }
-}
-
-.rp-text { display: flex; flex-direction: column; gap: 4px; }
-.rp-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -.3px;
-  color: #FFFFFF;
-  line-height: 1;
-  /* subtle shimmer on entry */
-  animation: none;
-}
-#ranker-popup.pop-in .rp-name {
-  animation: name-slide .5s .06s cubic-bezier(.16,1,.3,1) both;
-}
-@keyframes name-slide {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.rp-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-#ranker-popup.pop-in .rp-meta {
-  animation: name-slide .5s .12s cubic-bezier(.16,1,.3,1) both;
-}
-#ranker-popup.pop-in .rp-center {
-  animation: name-slide .5s .18s cubic-bezier(.16,1,.3,1) both;
-}
-
-.rp-rank {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: #F5A623;
-  letter-spacing: .3px;
-}
-.rp-sep {
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  flex-shrink: 0;
-}
-.rp-plan {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.5);
-}
-.rp-center {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: rgba(255,255,255,0.3);
-}
-
-/* modal video wrapper — NO overflow hidden so popup can escape */
-.modal-video-wrap {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: visible; /* allow popup to bleed out */
-  background: #000;
-}
-/* clip only the video itself, not the wrapper */
-.modal-video-wrap video {
-  border-radius: var(--radius-md);
-  display: block;
-  width: 100%;
-}
-
-/* fullscreen: popup must be inside the video element's stacking context */
-:fullscreen #ranker-popup,
-:-webkit-full-screen #ranker-popup {
-  position: fixed;
-  bottom: 52px;
-  left: 24px;
-  z-index: 2147483647;
-}
 </style>
 </head>
 <body>
@@ -1243,7 +1281,7 @@ footer {
   <div id="interview-grid" class="interview-grid"></div>
 </section>
 
-<!-- COLLAGE VIDEO — after all interviews -->
+<!-- COLLAGE VIDEO -->
 <div id="collage-video" class="reveal">
   <div class="collage-label">Behind the Celebrations</div>
   <div class="collage-title">
@@ -1280,6 +1318,7 @@ footer {
   <div id="footer-brand" class="footer-brand"></div>
 </footer>
 
+<!-- VIDEO MODAL -->
 <div id="video-modal">
   <div id="modal-backdrop" class="modal-backdrop"></div>
   <div class="modal-inner">
@@ -1290,32 +1329,39 @@ footer {
       </div>
       <button id="modal-close" class="modal-close" aria-label="Close">&#x2715;</button>
     </div>
+
+    <!-- Video player -->
     <div class="modal-video-wrap">
       <video id="modal-video-el" class="modal-video" controls preload="metadata"></video>
-    </div>
-    <!-- popup anchor sits OUTSIDE the video wrap so it bleeds below -->
-    <div id="ranker-popup-anchor">
-      <div id="ranker-popup">
-        <div class="rp-inner">
-          <div class="rp-accent"></div>
-          <div class="rp-text">
-            <div class="rp-name" id="rp-name"></div>
-            <div class="rp-meta">
-              <span class="rp-rank" id="rp-rank"></span>
-              <div class="rp-sep"></div>
-              <span class="rp-plan" id="rp-plan"></span>
-            </div>
-            <div class="rp-center" id="rp-center"></div>
-          </div>
-        </div>
-      </div>
     </div>
     <div id="modal-no-video" class="modal-no-video" style="display:none">
       <span style="font-size:48px">🎬</span>
       <p>Video file not found — place .mp4 files in /videos/</p>
     </div>
-  </div>
-</div>
+
+    <!-- RANKER POPUP — lives HERE, below the video, outside the player -->
+    <div id="ranker-popup">
+      <div class="rp-inner">
+        <img src="images/logo.png" id="rp-avatar" class="rp-avatar" alt="logo" onerror="this.style.display='none'">
+        <div class="rp-accent-bar"></div>
+        <div class="rp-text">
+          <div class="rp-name" id="rp-name"></div>
+          <div class="rp-meta">
+            <span class="rp-rank" id="rp-rank"></span>
+            <div class="rp-sep"></div>
+            <span class="rp-plan" id="rp-plan"></span>
+          </div>
+          <div class="rp-center-line" id="rp-center"></div>
+        </div>
+        <div class="rp-badge">
+          <div class="rp-badge-pill">Now Speaking</div>
+          <div class="rp-badge-dot"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .modal-inner -->
+</div><!-- end #video-modal -->
 
 <script>
 let DATA = null;
@@ -1349,22 +1395,6 @@ function renderAll() {
   renderFooter();
 }
 
-/* Achievement card click targets */
-const ACHIEVEMENT_LINKS = [
-  '#rank-distribution',   // Total Rankers Tracked
-  '#center-leaderboard',  // Face to Face Rankers
-  null,                   // Interviews Published → section id
-  '#hall-of-fame',        // Instagram Posts
-  null,                   // Care Calling
-  '#rank-distribution',   // Top 10 (extra)
-];
-const ACHIEVEMENT_LINK_MAP = {
-  0: '#rank-distribution',
-  1: '#center-leaderboard',
-  2: '#interviews',
-  3: '#hall-of-fame',
-};
-
 function initAchievementLinks() {
   document.querySelectorAll('.achievement-card[data-link]').forEach(card => {
     const target = card.getAttribute('data-link');
@@ -1380,18 +1410,17 @@ function renderAchievements() {
   const k = DATA.kpis;
   const achData = [
     { icon:'🏆', num: k.totalRankers,         title:'Total Rankers Tracked',   glow:'rgba(245,166,35,.15)',  link:'#rank-distribution' },
-    { icon:'🎓', num: k.f2fRankers,            title:'Face to Face Rankers',    glow:'rgba(255,107,53,.12)', link:'#center-leaderboard'       },
-    { icon:'🎥', num: k.interviewsPublished,   title:'Interviews Published',    glow:'rgba(79,70,229,.12)', link:'#interviews'},
-    { icon:'📱', num: k.instagramPosts,        title:'Instagram Posts',         glow:'rgba(236,72,153,.1)', link:'#hall-of-fame'},
-    { icon:'☎',  num: k.careCallingReach,      title:'Users Reached via Calls', glow:'rgba(16,185,129,.1)', link:null},
-    { icon:'🎯', num: DATA.rankDistribution[0].count, title:'Top 10 Achievers', glow:'rgba(245,166,35,.2)', link:null},
+    { icon:'🎓', num: k.f2fRankers,            title:'Face to Face Rankers',    glow:'rgba(255,107,53,.12)', link:'#center-leaderboard' },
+    { icon:'🎥', num: k.interviewsPublished,   title:'Interviews Published',    glow:'rgba(79,70,229,.12)',  link:'#interviews' },
+    { icon:'📱', num: k.instagramPosts,        title:'Instagram Posts',         glow:'rgba(236,72,153,.1)', link:'#hall-of-fame' },
+    { icon:'☎',  num: k.careCallingReach,      title:'Users Reached via Calls', glow:'rgba(16,185,129,.1)', link:null },
+    { icon:'🎯', num: DATA.rankDistribution[0].count, title:'Top 10 Achievers', glow:'rgba(245,166,35,.2)', link:null },
   ];
   document.getElementById('achievement-grid').innerHTML = achData.map((a,i) => `
     <div class="achievement-card reveal reveal-delay-${(i%4)+1}" style="--a-glow:${a.glow}" ${a.link ? `data-link="${a.link}"` : ''}>
       <div class="ach-icon">${a.icon}</div>
       <div class="ach-number" data-counter="${a.num}">0</div>
       <div class="ach-title">${a.title}</div>
-      ${a.tip ? `<div class="ach-arrow">${a.tip}</div>` : ''}
     </div>`).join('');
 }
 
@@ -1495,7 +1524,7 @@ function renderCenterLeaderboard() {
   const total   = centers.reduce((s,c) => s+c.count, 0);
   const medals  = ['gold','silver','bronze'];
   const emojis  = ['🥇','🥈','🥉'];
-  const podium = document.getElementById('podium-wrap');
+  const podium  = document.getElementById('podium-wrap');
   const podiumOrder = [1, 0, 2];
   podium.innerHTML = podiumOrder.map(i => {
     const c = centers[i];
@@ -1593,25 +1622,16 @@ function renderInterviews() {
   });
 }
 
-function initCollageVideo() {
-  document.getElementById('collage-trigger').addEventListener('click', () => {
-    openVideoModal({
-      video:  'videos/s.mp4',
-      name:   'Rank Day ',
-      plan:   'INI-CET MAY 2026',
-      center: 'Stories',
-      rank:   '🎬',
-      isCollage: true
-    });
-  });
+function renderFooter() {
+  document.getElementById('footer-brand').innerHTML = `INI-CET <span>MAY 2026</span> RANK DAY`;
 }
 
 /* ---- Collage timeline ranker data ---- */
 const COLLAGE_TIMELINE = [
-  { from: 3,  to: 29, name: 'Dr. Akshay',   rank: 'Rank 60',  plan: 'Face to Face Classes', center: 'Calicut'    },
-  { from: 30, to: 65, name: 'Dr. Arathi',   rank: 'Rank 232', plan: 'Live 360',              center: ''           },
-  { from: 66, to: 83, name: 'Dr. Siddharth',rank: 'Rank 78',  plan: 'Essential Plan',        center: ''           },
-  { from: 85, to:113, name: 'Dr. Amoolya',  rank: 'Rank 195', plan: 'Face to Face Classes',  center: 'Bengaluru'  },
+  { from: 3,  to: 29,  name: 'Dr. Akshay',    rank: 'Rank 60',  plan: 'Face to Face Classes', center: 'Calicut'   },
+  { from: 30, to: 65,  name: 'Dr. Arathi',    rank: 'Rank 232', plan: 'Live 360',              center: ''          },
+  { from: 66, to: 83,  name: 'Dr. Siddharth', rank: 'Rank 78',  plan: 'Essential Plan',        center: ''          },
+  { from: 85, to: 113, name: 'Dr. Amoolya',   rank: 'Rank 195', plan: 'Face to Face Classes',  center: 'Bengaluru' },
 ];
 
 let popupTimeout  = null;
@@ -1619,14 +1639,14 @@ let activeSegment = null;
 
 function showRankerPopup(seg) {
   const popup = document.getElementById('ranker-popup');
-  document.getElementById('rp-name').textContent   = seg.name;
-  document.getElementById('rp-rank').textContent   = seg.rank;
-  document.getElementById('rp-plan').textContent   = seg.plan;
-  document.getElementById('rp-center').textContent = seg.center ? '📍 ' + seg.center : '';
+  document.getElementById('rp-name').textContent    = seg.name;
+  document.getElementById('rp-rank').textContent    = seg.rank;
+  document.getElementById('rp-plan').textContent    = seg.plan;
+  document.getElementById('rp-center').textContent  = seg.center ? '📍 ' + seg.center : '';
+  // optional per-ranker emoji: document.getElementById('rp-avatar').textContent = seg.emoji || '🩺';
 
-  // reset animations cleanly
-  popup.classList.remove('pop-in','pop-out');
-  void popup.offsetWidth; // reflow to restart animations
+  popup.classList.remove('pop-in', 'pop-out');
+  void popup.offsetWidth; // force reflow to restart animations
   popup.classList.add('pop-in');
 }
 
@@ -1638,40 +1658,12 @@ function hideRankerPopup() {
   popupTimeout = setTimeout(() => {
     popup.classList.remove('pop-out');
     activeSegment = null;
-  }, 300);
-}
-
-/* Move popup inside/outside depending on fullscreen */
-function setupFullscreenListener(videoEl) {
-  const popup  = document.getElementById('ranker-popup');
-  const anchor = document.getElementById('ranker-popup-anchor');
-
-  function onFSChange() {
-    const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
-    if (fsEl) {
-      // Fullscreen — move popup inside the video element as a sibling
-      popup.classList.add('inside');
-      videoEl.parentNode.appendChild(popup); // move into .modal-video-wrap
-    } else {
-      // Normal — move popup back under anchor
-      popup.classList.remove('inside');
-      anchor.appendChild(popup);
-    }
-  }
-
-  document.addEventListener('fullscreenchange',       onFSChange);
-  document.addEventListener('webkitfullscreenchange', onFSChange);
+  }, 350);
 }
 
 function attachCollageTimeline(videoEl) {
-  // clear any previous listener by cloning
-  const fresh = videoEl.cloneNode(true);
-  videoEl.parentNode.replaceChild(fresh, videoEl);
-  // re-grab after replace
-  const vid = document.getElementById('modal-video-el');
-
-  vid.addEventListener('timeupdate', () => {
-    const t = vid.currentTime;
+  videoEl.addEventListener('timeupdate', () => {
+    const t   = videoEl.currentTime;
     const seg = COLLAGE_TIMELINE.find(s => t >= s.from && t <= s.to);
     if (seg) {
       if (seg !== activeSegment) {
@@ -1684,62 +1676,84 @@ function attachCollageTimeline(videoEl) {
     }
   });
 
-  vid.addEventListener('pause',  () => { /* keep popup visible while paused */ });
-  vid.addEventListener('seeked', () => {
-    // re-evaluate immediately after seek
-    const t = vid.currentTime;
+  videoEl.addEventListener('seeked', () => {
+    const t   = videoEl.currentTime;
     const seg = COLLAGE_TIMELINE.find(s => t >= s.from && t <= s.to);
     if (seg) { activeSegment = seg; showRankerPopup(seg); }
     else      { if (activeSegment) hideRankerPopup(); }
   });
+}
 
-  setupFullscreenListener(vid);
-  return vid;
+function initCollageVideo() {
+  document.getElementById('collage-trigger').addEventListener('click', () => {
+    openVideoModal({
+      video:     'videos/s.mp4',
+      name:      'Rank Day',
+      plan:      'INI-CET MAY 2026',
+      center:    'Stories',
+      rank:      '🎬',
+      isCollage: true
+    });
+  });
 }
 
 function initVideoModal() {
   const modal    = document.getElementById('video-modal');
   const backdrop = document.getElementById('modal-backdrop');
   const closeBtn = document.getElementById('modal-close');
-  const videoEl  = document.getElementById('modal-video-el');
+
   function close() {
     modal.classList.remove('open');
     const vid = document.getElementById('modal-video-el');
     if (vid) vid.pause();
+    // reset popup
     const popup = document.getElementById('ranker-popup');
-    popup.classList.remove('pop-in','pop-out');
+    popup.classList.remove('pop-in', 'pop-out');
     activeSegment = null;
   }
+
   backdrop.addEventListener('click', close);
   closeBtn.addEventListener('click', close);
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
 function openVideoModal({ video, name, plan, center, rank, isCollage }) {
   const modal   = document.getElementById('video-modal');
-  let videoEl = document.getElementById('modal-video-el');
+  const videoEl = document.getElementById('modal-video-el');
   const noVideo = document.getElementById('modal-no-video');
-  // reset popup state
-  const popup = document.getElementById('ranker-popup');
-  popup.classList.remove('pop-in','pop-out');
+  const popup   = document.getElementById('ranker-popup');
+
+  // Reset popup state
+  popup.classList.remove('pop-in', 'pop-out');
   activeSegment = null;
 
   document.getElementById('modal-title').textContent = name;
-  document.getElementById('modal-sub').textContent   = `${rank !== '🎬' ? 'Rank ' : ''}${rank} · ${plan} · ${center}`;
+  document.getElementById('modal-sub').textContent   =
+    `${rank !== '🎬' ? 'Rank ' : ''}${rank} · ${plan} · ${center}`;
 
+  // For collage: wire up the timeline, for interviews: hide popup entirely
   if (isCollage) {
-    videoEl = attachCollageTimeline(videoEl);
+    // Remove old listeners by cloning the element
+    const fresh = videoEl.cloneNode(true);
+    videoEl.parentNode.replaceChild(fresh, videoEl);
+    const newVid = document.getElementById('modal-video-el');
+    attachCollageTimeline(newVid);
+    newVid.src = video;
+    newVid.style.display = 'block';
+    noVideo.style.display = 'none';
+    newVid.onerror = () => { newVid.style.display = 'none'; noVideo.style.display = 'flex'; };
+  } else {
+    // Regular interview — no popup
+    videoEl.src = video;
+    videoEl.style.display = 'block';
+    noVideo.style.display = 'none';
+    videoEl.onerror = () => { videoEl.style.display = 'none'; noVideo.style.display = 'flex'; };
   }
 
-  videoEl.src = video; videoEl.style.display = 'block'; noVideo.style.display = 'none';
-  videoEl.onerror = () => { videoEl.style.display = 'none'; noVideo.style.display = 'flex'; };
   modal.classList.add('open');
 }
 
-function renderFooter() {
-  document.getElementById('footer-brand').innerHTML = `INI-CET <span>MAY 2026</span> RANK DAY`;
-}
-
+/* ---- Counters ---- */
 function initCounters() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1753,20 +1767,23 @@ function animateCounter(el) {
   const target = parseInt(el.getAttribute('data-counter'));
   const duration = 1400; const start = performance.now();
   function step(now) {
-    const elapsed = now - start; const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased    = 1 - Math.pow(1 - progress, 3);
     el.textContent = Math.round(eased * target);
     if (progress < 1) requestAnimationFrame(step); else el.textContent = target;
   }
   requestAnimationFrame(step);
 }
 
+/* ---- Bars ---- */
 function initBars() {
   document.querySelectorAll('.bar-fill').forEach(bar => {
     const barObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          const w = e.target.getAttribute('data-width'); if (w) e.target.style.width = w + '%';
+          const w = e.target.getAttribute('data-width');
+          if (w) e.target.style.width = w + '%';
           barObserver.unobserve(e.target);
         }
       });
@@ -1775,36 +1792,46 @@ function initBars() {
   });
 }
 
+/* ---- Scroll reveal ---- */
 function initScrollReveal() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
+/* ---- Nav scroll ---- */
 function initNavScroll() {
-  const nav = document.getElementById('navbar');
+  const nav   = document.getElementById('navbar');
   const links = nav.querySelectorAll('a[href^="#"]');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
     let current = '';
-    document.querySelectorAll('section[id]').forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
+    document.querySelectorAll('section[id]').forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
     links.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
   }, { passive: true });
 }
 
+/* ---- Fallback data ---- */
 function getFallbackData() {
   return {
     meta: { exam:"INI-CET MAY 2026", lastUpdated: new Date().toISOString() },
     kpis: { totalRankers:74, f2fRankers:33, interviewsPublished:13, instagramPosts:64, careCallingReach:301, careCallingAttempts:7 },
     rankDistribution: [
-      { range:"Top 10", count:2 },{ range:"10-100", count:11 },
-      { range:"101–300", count:22 },{ range:"301–500", count:16 },{ range:"501–1000", count:23 }
+      { range:"Top 10",    count:2  },
+      { range:"10–100",   count:11 },
+      { range:"101–300",  count:22 },
+      { range:"301–500",  count:16 },
+      { range:"501–1000", count:23 }
     ],
     plans: [
       { name:"Face to Face Classes", short:"F2F",           count:34, color:"#FF6B35" },
       { name:"Live 360",             short:"Live 360",       count:18, color:"#4F46E5" },
-      { name:"Live T&D",             short:"Live T&D",       count:10,  color:"#0EA5E9" },
+      { name:"Live T&D",             short:"Live T&D",       count:10, color:"#0EA5E9" },
       { name:"Advance Plus",         short:"Adv+",           count:9,  color:"#10B981" },
       { name:"Essential",            short:"Essential",      count:2,  color:"#8B5CF6" },
       { name:"Pre Foundation",       short:"Pre Foundation", count:1,  color:"#EC4899" }
@@ -1818,9 +1845,9 @@ function getFallbackData() {
       { plan:"Pre Foundation",       top10:0, top100:1, r101_300:0,  r301_500:0,  r501_1000:0  }
     ],
     centers: [
-      { name:"Hyderabad",   count:8, medal:"gold"   },
-      { name:"Calicut",     count:6, medal:"silver" },
-      { name:"Delhi",       count:6, medal:"bronze" },
+      { name:"Hyderabad",   count:8 },
+      { name:"Calicut",     count:6 },
+      { name:"Delhi",       count:6 },
       { name:"Bangalore",   count:5 },
       { name:"Cochin",      count:4 },
       { name:"Vizag",       count:3 },
@@ -1849,19 +1876,19 @@ function getFallbackData() {
       { rank:60, name:"Dr. Abhishek",     plan:"Face to Face Classes", center:"Calicut", image:"images/rank_89.jpg" }
     ],
     interviews: [
-      { rank:7,   name:"Dr. Naveen",    plan:"Live T&D",            center:"Confidence under pressure",                       video:"videos/rank_7.mp4",   thumbnail:"images/t_7.jpg"   },
-      { rank:8,   name:"Dr. Sairaj",    plan:"Essential",            center:"I Wasn't Even Expecting This Rank",               video:"videos/rank_8.mp4",   thumbnail:"images/t_8.jpg"   },
-      { rank:13,  name:"Dr. Manav",     plan:"Face to Face Classes", center:"I Dedicated This 100% To My Parents.",            video:"videos/rank_13.mp4",  thumbnail:"images/t_13.jpg"  },
-      { rank:40,  name:"Dr. Aarcha",    plan:"Live 360",             center:"1 lakh rank → AIR 40 comeback",                  video:"videos/rank_40.mp4",  thumbnail:"images/t_40.jpg"  },
-      { rank:47,  name:"Dr. Leeladhar", plan:"Live 360",             center:"Cracked it during tough internship",              video:"videos/rank_47.mp4",  thumbnail:"images/t_47.jpg"  },
-      { rank:55,  name:"Dr. Seenu",     plan:"Live 360",             center:"Depression → comeback → AIR 55",                 video:"videos/rank_55.mp4",  thumbnail:"images/t_55.jpg"  },
-      { rank:60,  name:"Dr. Abhishek",  plan:"Face to Face Classes", center:"From Rank 14,000 to AIR 60: Relentless Discipline.", video:"videos/rank_60.mp4",  thumbnail:"images/t_60.jpg"  },
-      { rank:78,  name:"Dr. Siddharth", plan:"Essential",            center:"If An FMG Can Do It, Anyone Can.",                video:"videos/rank_78.mp4",  thumbnail:"images/t_78.jpg"  },
-      { rank:178, name:"Dr. Adarsh",    plan:"Live T&D",             center:"Google Meet GT review strategy",                  video:"videos/rank_178.mp4", thumbnail:"images/t_178.jpg" },
-      { rank:195, name:"Dr. Amoolya",   plan:"Face to Face Classes", center:"Every Rank Has A Story. This One Has A Mother❤️.", video:"videos/rank_195.mp4", thumbnail:"images/t_195.jpg" },
-      { rank:201, name:"Dr. Ria",       plan:"Face to Face Classes", center:"I Acted Like AIR 201 Was Already Mine.",          video:"videos/rank_201.mp4", thumbnail:"images/t_201.jpg" },
-      { rank:227, name:"Dr. Akshay",    plan:"Live 360",             center:"I Stopped Chasing Resources.",                    video:"videos/rank_227.mp4", thumbnail:"images/t_227.jpg" },
-      { rank:232, name:"Dr. Arathi",    plan:"Live 360",             center:"I Kept Asking: 'Is This Really Enough?",          video:"videos/rank_232.mp4", thumbnail:"images/t_232.jpg" }
+      { rank:7,   name:"Dr. Naveen",    plan:"Live T&D",            center:"Confidence under pressure",                        video:"videos/rank_7.mp4",   thumbnail:"images/t_7.jpg"   },
+      { rank:8,   name:"Dr. Sairaj",    plan:"Essential",           center:"I Wasn't Even Expecting This Rank",                video:"videos/rank_8.mp4",   thumbnail:"images/t_8.jpg"   },
+      { rank:13,  name:"Dr. Manav",     plan:"Face to Face Classes",center:"I Dedicated This 100% To My Parents.",             video:"videos/rank_13.mp4",  thumbnail:"images/t_13.jpg"  },
+      { rank:40,  name:"Dr. Aarcha",    plan:"Live 360",            center:"1 lakh rank → AIR 40 comeback",                   video:"videos/rank_40.mp4",  thumbnail:"images/t_40.jpg"  },
+      { rank:47,  name:"Dr. Leeladhar", plan:"Live 360",            center:"Cracked it during tough internship",               video:"videos/rank_47.mp4",  thumbnail:"images/t_47.jpg"  },
+      { rank:55,  name:"Dr. Seenu",     plan:"Live 360",            center:"Depression → comeback → AIR 55",                  video:"videos/rank_55.mp4",  thumbnail:"images/t_55.jpg"  },
+      { rank:60,  name:"Dr. Abhishek",  plan:"Face to Face Classes",center:"From Rank 14,000 to AIR 60: Relentless Discipline.",video:"videos/rank_60.mp4", thumbnail:"images/t_60.jpg"  },
+      { rank:78,  name:"Dr. Siddharth", plan:"Essential",           center:"If An FMG Can Do It, Anyone Can.",                 video:"videos/rank_78.mp4",  thumbnail:"images/t_78.jpg"  },
+      { rank:178, name:"Dr. Adarsh",    plan:"Live T&D",            center:"Google Meet GT review strategy",                   video:"videos/rank_178.mp4", thumbnail:"images/t_178.jpg" },
+      { rank:195, name:"Dr. Amoolya",   plan:"Face to Face Classes",center:"Every Rank Has A Story. This One Has A Mother❤️.", video:"videos/rank_195.mp4", thumbnail:"images/t_195.jpg" },
+      { rank:201, name:"Dr. Ria",       plan:"Face to Face Classes",center:"I Acted Like AIR 201 Was Already Mine.",           video:"videos/rank_201.mp4", thumbnail:"images/t_201.jpg" },
+      { rank:227, name:"Dr. Akshay",    plan:"Live 360",            center:"I Stopped Chasing Resources.",                     video:"videos/rank_227.mp4", thumbnail:"images/t_227.jpg" },
+      { rank:232, name:"Dr. Arathi",    plan:"Live 360",            center:"I Kept Asking: 'Is This Really Enough?",           video:"videos/rank_232.mp4", thumbnail:"images/t_232.jpg" }
     ],
     careCalling: { attempts:7, reach:301 }
   };
